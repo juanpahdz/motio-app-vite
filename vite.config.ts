@@ -4,6 +4,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import electron from 'vite-plugin-electron/simple'
 import pkg from './package.json'
+import sass from 'sass';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
@@ -64,6 +65,13 @@ export default defineConfig(({ command }) => {
         renderer: {},
       }),
     ],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          implementation: sass,
+        },
+      },
+    },
     server: process.env.VSCODE_DEBUG && (() => {
       const url = new URL(pkg.debug.env.VITE_DEV_SERVER_URL)
       return {
